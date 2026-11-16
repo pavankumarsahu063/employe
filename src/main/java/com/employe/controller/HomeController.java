@@ -1,5 +1,7 @@
 package com.employe.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,11 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class HomeController {
 
+    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+
     @GetMapping("/")
     public ResponseEntity<Map<String, Object>> rootEndpoint() {
+        log.info("REST request to root endpoint '/'");
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("status", "UP");
         response.put("service", "Employee Management REST API");
@@ -34,6 +39,7 @@ public class HomeController {
 
     @GetMapping("/health")
     public ResponseEntity<Map<String, String>> healthCheck() {
+        log.info("REST request to '/health'");
         Map<String, String> health = new LinkedHashMap<>();
         health.put("status", "UP");
         health.put("message", "Service is healthy and operational");
